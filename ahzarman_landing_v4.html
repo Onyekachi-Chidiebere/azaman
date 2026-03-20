@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahzarman — One app for everything</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green:#7EA800;--green-mid:#9DC416;--green-pale:#F3F8E6;--green-border:#E3EFC4;
+  --green-deep:#5C7A00;
+  --black:#0D0D0D;--gray-900:#1A1A1A;--gray-600:#6B6B6B;--gray-400:#A3A3A3;
+  --gray-100:#F5F5F4;--gray-50:#FAFAF8;--white:#FFFFFF;--border:#E8E8E5;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.08),0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.1),0 4px 12px rgba(0,0,0,0.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--black);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{width:34px;height:34px;background:var(--green);border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.logo-mark svg{width:20px;height:20px;}
+.logo-name{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;color:var(--black);letter-spacing:-0.3px;}
+.nav-center{display:flex;align-items:center;gap:2px;}
+.nav-center a{font-size:14px;color:var(--gray-600);text-decoration:none;padding:7px 14px;border-radius:8px;transition:background .15s,color .15s;}
+.nav-center a:hover{background:var(--gray-100);color:var(--black);}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.btn-ghost{font-size:14px;font-weight:500;color:var(--gray-600);text-decoration:none;padding:8px 16px;border-radius:9px;border:1px solid transparent;transition:border-color .15s,color .15s;}
+.btn-ghost:hover{border-color:var(--border);color:var(--black);}
+.btn-green{font-size:14px;font-weight:600;background:var(--green);color:white;padding:9px 20px;border-radius:9px;text-decoration:none;border:none;cursor:pointer;transition:background .15s,transform .1s;display:inline-flex;align-items:center;gap:6px;}
+.btn-green:hover{background:#6F9500;transform:translateY(-1px);}
+
+.hero{padding:96px 48px 80px;text-align:center;max-width:900px;margin:0 auto;}
+.hero-chip{display:inline-flex;align-items:center;gap:7px;background:var(--green-pale);border:1px solid var(--green-border);color:var(--green);font-size:12.5px;font-weight:500;padding:5px 12px 5px 8px;border-radius:100px;margin-bottom:36px;animation:fadeUp .5s ease both;}
+.hero-chip-dot{width:20px;height:20px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.hero-chip-dot svg{width:10px;height:10px;}
+.hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(44px,6.5vw,80px);font-weight:800;letter-spacing:-2.5px;line-height:1.05;color:var(--black);margin-bottom:24px;animation:fadeUp .5s .08s ease both;}
+.hero h1 .accent{color:var(--green);}
+.hero-sub{font-size:18px;font-weight:300;line-height:1.7;color:var(--gray-600);max-width:520px;margin:0 auto 44px;animation:fadeUp .5s .16s ease both;}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;animation:fadeUp .5s .24s ease both;margin-bottom:72px;}
+.btn-primary-lg{background:var(--black);color:white;font-size:15px;font-weight:600;padding:14px 28px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .15s,transform .1s;border:none;cursor:pointer;}
+.btn-primary-lg:hover{background:var(--gray-900);transform:translateY(-1px);}
+.btn-outline-lg{background:white;color:var(--black);font-size:15px;font-weight:500;padding:14px 28px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);transition:border-color .15s,transform .1s,box-shadow .15s;}
+.btn-outline-lg:hover{border-color:#ccc;transform:translateY(-1px);box-shadow:var(--shadow-sm);}
+
+.social-proof{display:flex;align-items:center;justify-content:center;gap:16px;animation:fadeUp .5s .32s ease both;margin-bottom:56px;}
+.avatars{display:flex;}
+.avatar{width:32px;height:32px;border-radius:50%;border:2px solid white;margin-left:-10px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--gray-600);}
+.avatar:first-child{margin-left:0;}
+.social-text{font-size:13.5px;color:var(--gray-600);}
+.social-text strong{color:var(--black);font-weight:600;}
+.stars{color:var(--green);font-size:13px;letter-spacing:1px;}
+
+/* ── HERO VISUAL with visible floaters ── */
+.hero-visual-wrap{
+  animation:fadeUp .6s .38s ease both;
+  position:relative;
+  max-width:780px;
+  margin:0 auto;
+  padding:48px 0 40px;
+}
+
+/* Float cards — positioned OVER the dashboard card, fully in-viewport */
+.float-card{
+  position:absolute;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px 16px;
+  box-shadow:var(--shadow-md);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  z-index:20;
+  white-space:nowrap;
+}
+.float-card.fc-top-left{
+  top:10px; left:-8px;
+  animation:floatBob 4s ease-in-out infinite;
+}
+.float-card.fc-top-right{
+  top:10px; right:-8px;
+  animation:floatBob 4s .9s ease-in-out infinite;
+}
+.float-card.fc-bottom-right{
+  bottom:10px; right:-8px;
+  animation:floatBob 4s 1.8s ease-in-out infinite;
+}
+@keyframes floatBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+.float-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.float-label{font-size:11px;color:var(--gray-400);line-height:1.2;}
+.float-val{font-size:13px;font-weight:600;color:var(--black);line-height:1.3;}
+
+/* Dashboard card */
+.dashboard-card{background:var(--white);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow-lg);padding:28px;text-align:left;position:relative;}
+.dashboard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+.dash-user{display:flex;align-items:center;gap:12px;}
+.dash-avatar{width:40px;height:40px;background:var(--green-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--green-border);}
+.dash-avatar svg{width:20px;height:20px;}
+.dash-name{font-size:14px;font-weight:600;color:var(--black);}
+.dash-sub{font-size:12px;color:var(--gray-400);margin-top:1px;}
+/* Points in header — brand green */
+.dash-points-badge{display:flex;align-items:center;gap:8px;}
+.points-pill{background:var(--green-pale);border:1px solid var(--green-border);color:var(--green-deep);font-size:13px;font-weight:700;padding:8px 14px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;font-family:'Bricolage Grotesque',sans-serif;}
+.points-pill svg{width:14px;height:14px;}
+.share-pts-btn{font-size:12px;font-weight:600;color:var(--green);background:var(--green-pale);border:1px solid var(--green-border);padding:8px 12px;border-radius:100px;cursor:pointer;white-space:nowrap;}
+
+.dash-services{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:24px;}
+.dash-svc{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 6px;border-radius:14px;background:var(--gray-50);border:1px solid var(--border);cursor:pointer;transition:background .15s,border-color .15s,transform .15s;}
+.dash-svc:hover,.dash-svc.active{background:var(--green-pale);border-color:var(--green-border);}
+.dash-svc:hover{transform:translateY(-2px);}
+.svc-icon{width:38px;height:38px;border-radius:10px;background:white;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
+.dash-svc.active .svc-icon{background:var(--green);border-color:var(--green);}
+.dash-svc.active .svc-icon svg{stroke:white;}
+.svc-label{font-size:10.5px;font-weight:500;color:var(--gray-600);text-align:center;line-height:1.3;}
+.dash-svc.active .svc-label{color:var(--green);}
+
+.dash-pay-panel{background:var(--gray-50);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin-bottom:20px;}
+.panel-label{font-size:11px;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;}
+.panel-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.panel-input{flex:1;background:white;border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--black);font-family:inherit;outline:none;}
+.panel-input::placeholder{color:var(--gray-400);}
+.panel-amounts{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap;}
+.amt-chip{background:white;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12.5px;font-weight:500;color:var(--gray-600);cursor:pointer;transition:border-color .15s,background .15s;}
+.amt-chip.sel{background:var(--green-pale);border-color:var(--green-border);color:var(--green);}
+/* Points earn hint — green */
+.points-earn-hint{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--green-deep);background:var(--green-pale);border:1px solid var(--green-border);border-radius:8px;padding:8px 12px;margin-bottom:12px;}
+.points-earn-hint svg{flex-shrink:0;}
+.panel-note{font-size:12px;color:var(--gray-400);line-height:1.5;display:flex;align-items:flex-start;gap:6px;margin-bottom:12px;}
+.panel-note svg{flex-shrink:0;margin-top:1px;}
+.btn-pay-now{width:100%;background:var(--green);color:white;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s;font-family:inherit;}
+.btn-pay-now:hover{background:#6F9500;}
+
+.dash-section-label{font-size:11px;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;}
+.tx-list{display:flex;flex-direction:column;gap:2px;}
+.tx{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;transition:background .12s;}
+.tx:hover{background:var(--gray-50);}
+.tx-icon{width:34px;height:34px;border-radius:10px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tx-info{flex:1;}
+.tx-name{font-size:13px;font-weight:500;color:var(--black);}
+.tx-time{font-size:11.5px;color:var(--gray-400);margin-top:1px;}
+.tx-token{font-size:10.5px;font-weight:600;color:var(--green);background:var(--green-pale);border:1px solid var(--green-border);padding:1px 7px;border-radius:6px;display:inline-block;margin-top:3px;}
+.tx-right{text-align:right;}
+.tx-amount{font-size:13.5px;font-weight:700;color:var(--black);}
+/* Points tag — green */
+.tx-pts{font-size:10.5px;font-weight:700;color:var(--green-deep);background:var(--green-pale);border:1px solid var(--green-border);padding:1px 7px;border-radius:6px;display:inline-block;margin-top:3px;}
+
+/* ── LOGOS ── */
+.logos-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:26px 48px;display:flex;align-items:center;justify-content:center;gap:0;}
+.logos-label{font-size:12.5px;color:var(--gray-400);white-space:nowrap;margin-right:40px;}
+.logos-track{display:flex;align-items:center;gap:48px;flex-wrap:wrap;justify-content:center;}
+.logo-pill{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--gray-400);white-space:nowrap;}
+.logo-pill svg{width:18px;height:18px;}
+
+/* ── SECTION COMMONS ── */
+.services-section{padding:100px 48px;}
+.section-eyebrow{font-size:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--green);margin-bottom:14px;}
+.section-heading{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(30px,3.5vw,46px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;color:var(--black);margin-bottom:16px;}
+.section-sub{font-size:16px;font-weight:300;line-height:1.7;color:var(--gray-600);max-width:480px;margin-bottom:56px;}
+
+/* ── SERVICES GRID ── */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.svc-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:32px;transition:box-shadow .2s,transform .2s,border-color .2s;cursor:default;position:relative;overflow:hidden;}
+.svc-card::after{content:'';position:absolute;inset:0;background:var(--green-pale);opacity:0;transition:opacity .25s;border-radius:20px;pointer-events:none;}
+.svc-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--green-border);}
+.svc-card:hover::after{opacity:1;}
+.svc-card-icon{width:48px;height:48px;border-radius:13px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;margin-bottom:20px;position:relative;z-index:1;transition:background .25s;}
+.svc-card:hover .svc-card-icon{background:rgba(126,168,0,0.15);}
+.svc-card h3{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;letter-spacing:-0.3px;margin-bottom:8px;position:relative;z-index:1;}
+.svc-card p{font-size:14px;line-height:1.65;color:var(--gray-600);font-weight:300;position:relative;z-index:1;}
+.svc-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:16px;position:relative;z-index:1;}
+.svc-card-tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:500;color:var(--green);}
+.svc-card-tag svg{width:12px;height:12px;}
+/* Points tag on service cards — green */
+.svc-pts-tag{font-size:11px;font-weight:700;color:var(--green-deep);background:var(--green-pale);border:1px solid var(--green-border);padding:3px 9px;border-radius:20px;}
+
+/* ── POINTS SECTION ── */
+.points-section{padding:0 48px 100px;}
+.points-hero{background:var(--black);border-radius:24px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden;margin-bottom:24px;}
+.points-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 100% 50%,rgba(126,168,0,0.18) 0%,transparent 65%);pointer-events:none;}
+.points-hero-text h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;color:white;margin-bottom:16px;}
+.points-hero-text h2 span{color:var(--green-mid);}
+.points-hero-text p{font-size:15px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:28px;}
+.points-how{display:flex;flex-direction:column;gap:14px;}
+.points-how-item{display:flex;align-items:flex-start;gap:12px;}
+/* Step number — green */
+.pts-step-num{width:26px;height:26px;border-radius:50%;background:rgba(126,168,0,0.2);border:1px solid rgba(126,168,0,0.35);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--green-mid);flex-shrink:0;margin-top:1px;}
+.pts-step-text{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.55;}
+.pts-step-text strong{color:white;}
+
+/* Points card mockup — green accents */
+.points-card-mockup{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:26px;position:relative;z-index:1;}
+.pts-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;}
+.pts-card-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px;}
+.pts-card-balance{font-family:'Bricolage Grotesque',sans-serif;font-size:40px;font-weight:800;color:var(--green-mid);letter-spacing:-2px;line-height:1;}
+.pts-card-sub{font-size:12px;color:rgba(255,255,255,0.35);margin-top:4px;}
+.pts-bar{height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:6px;overflow:hidden;}
+.pts-bar-fill{height:100%;width:68%;background:linear-gradient(90deg,var(--green),var(--green-mid));border-radius:3px;}
+.pts-bar-label{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.3);}
+.pts-actions{display:flex;gap:10px;margin-top:18px;}
+.pts-action-btn{flex:1;padding:10px;border-radius:10px;font-size:12.5px;font-weight:600;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;}
+.pts-action-btn.primary{background:var(--green);color:white;}
+.pts-action-btn.secondary{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.1);}
+.pts-share-list{margin-top:16px;display:flex;flex-direction:column;gap:8px;}
+.pts-friend{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border-radius:10px;padding:9px 12px;}
+.pts-friend-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.pts-friend-name{font-size:13px;color:rgba(255,255,255,0.8);flex:1;}
+/* Friend points sent — green */
+.pts-friend-sent{font-size:12px;font-weight:700;color:var(--green-mid);}
+
+/* Points feature cards — green */
+.points-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.pts-feat-card{background:var(--gray-50);border:1px solid var(--border);border-radius:20px;padding:28px;transition:transform .2s,box-shadow .2s;}
+.pts-feat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
+.pts-feat-icon{width:44px;height:44px;border-radius:12px;background:var(--green-pale);border:1px solid var(--green-border);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.pts-feat-card h4{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;letter-spacing:-0.3px;margin-bottom:8px;}
+.pts-feat-card p{font-size:13.5px;line-height:1.65;color:var(--gray-600);font-weight:300;}
+
+/* ── BENTO ── */
+.bento-section{padding:0 48px 100px;}
+.bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.bento-card{background:var(--gray-50);border:1px solid var(--border);border-radius:20px;padding:36px 32px;transition:transform .2s,box-shadow .2s;}
+.bento-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
+.bento-card.wide{grid-column:span 2;}
+.bento-card.tall{display:flex;flex-direction:column;justify-content:space-between;min-height:280px;}
+.bento-card.accent{background:var(--green);border-color:var(--green);}
+.bento-card.accent h3,.bento-card.accent p{color:white;}
+.bento-card.accent p{opacity:.75;}
+.bento-card.dark{background:var(--black);border-color:var(--black);}
+.bento-card.dark h3{color:white;}
+.bento-card.dark p{color:rgba(255,255,255,0.5)!important;}
+.bento-icon{width:44px;height:44px;border-radius:12px;background:white;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
+.bento-card.accent .bento-icon{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.2);}
+.bento-card.dark .bento-icon{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.08);}
+.bento-card h3{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;font-weight:700;letter-spacing:-0.4px;margin-bottom:8px;}
+.bento-card p{font-size:14px;line-height:1.65;color:var(--gray-600);font-weight:300;}
+.bento-stat{font-family:'Bricolage Grotesque',sans-serif;font-size:52px;font-weight:800;letter-spacing:-3px;line-height:1;color:var(--black);margin-top:16px;}
+.bento-card.accent .bento-stat{color:white;}
+.mini-tx-list{margin-top:20px;display:flex;flex-direction:column;gap:8px;}
+.mini-tx{display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--border);border-radius:10px;padding:10px 12px;}
+.mini-tx-icon{width:28px;height:28px;border-radius:7px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mini-tx-name{font-size:12.5px;font-weight:500;flex:1;}
+.mini-tx-right{text-align:right;}
+.mini-tx-amt{font-size:12px;font-weight:600;color:var(--black);display:block;}
+.mini-tx-token{font-size:10.5px;font-weight:600;color:var(--green);background:var(--green-pale);padding:1px 7px;border-radius:5px;display:inline-block;margin-top:2px;}
+.mini-tx-pts{font-size:10.5px;font-weight:700;color:var(--green-deep);background:var(--green-pale);border:1px solid var(--green-border);padding:1px 7px;border-radius:5px;display:inline-block;margin-top:2px;}
+
+/* ── HOW ── */
+.how-section{padding:0 48px 100px;}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:56px;}
+.how-grid::before{content:'';position:absolute;top:22px;left:calc(12.5% + 22px);width:calc(75% - 44px);height:1px;background:var(--border);z-index:0;}
+.how-step{padding:0 24px;}
+.how-step-num{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:white;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--black);margin-bottom:24px;position:relative;z-index:1;transition:background .2s,border-color .2s,color .2s;}
+.how-step:hover .how-step-num{background:var(--green);border-color:var(--green);color:white;}
+.how-step h4{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;letter-spacing:-0.2px;margin-bottom:8px;}
+.how-step p{font-size:13.5px;line-height:1.65;color:var(--gray-600);font-weight:300;}
+
+/* ── CTA ── */
+.cta-section{margin:0 48px 80px;background:var(--black);border-radius:24px;padding:80px;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(126,168,0,0.2) 0%,transparent 65%);pointer-events:none;}
+.cta-section h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-2px;line-height:1.1;color:#fff;margin-bottom:18px;position:relative;z-index:1;}
+.cta-section p{font-size:17px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.65;max-width:420px;margin:0 auto 40px;position:relative;z-index:1;}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:12px;position:relative;z-index:1;flex-wrap:wrap;}
+.btn-white{background:white;color:var(--black);font-size:14px;font-weight:600;padding:13px 26px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .15s,transform .1s;}
+.btn-white:hover{background:var(--gray-100);transform:translateY(-1px);}
+.btn-green-outline{background:transparent;border:1px solid rgba(255,255,255,0.15);color:white;font-size:14px;font-weight:500;padding:13px 26px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:border-color .15s,transform .1s;}
+.btn-green-outline:hover{border-color:rgba(255,255,255,0.35);transform:translateY(-1px);}
+.cta-note{font-size:12.5px;color:rgba(255,255,255,0.25);margin-top:20px;position:relative;z-index:1;}
+
+/* ── FOOTER ── */
+footer{padding:60px 48px 0;border-top:1px solid var(--border);}
+.footer-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:60px;padding-bottom:48px;}
+.footer-brand p{font-size:14px;line-height:1.7;color:var(--gray-400);font-weight:300;margin:14px 0 24px;max-width:240px;}
+.footer-stores{display:flex;gap:10px;flex-wrap:wrap;}
+.store-btn{display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;border:1px solid var(--border);color:var(--black);font-size:12.5px;font-weight:600;text-decoration:none;background:white;transition:border-color .15s,box-shadow .15s;}
+.store-btn:hover{border-color:#ccc;box-shadow:var(--shadow-sm);}
+.footer-col h5{font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--black);margin-bottom:18px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.footer-col a{font-size:14px;color:var(--gray-600);text-decoration:none;font-weight:300;transition:color .15s;}
+.footer-col a:hover{color:var(--black);}
+.footer-bottom{padding:20px 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--gray-400);}
+.footer-bottom a{color:var(--gray-400);text-decoration:none;}
+.footer-bottom a:hover{color:var(--black);}
+.footer-bottom-links{display:flex;gap:24px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal.delay-1{transition-delay:.08s;}
+.reveal.delay-2{transition-delay:.16s;}
+.reveal.delay-3{transition-delay:.24s;}
+
+@media(max-width:960px){
+  nav{padding:0 24px;}.nav-center{display:none;}
+  .hero{padding:72px 24px 60px;}
+  .float-card{display:none;}
+  .dashboard-card{padding:18px;}
+  .dash-services{grid-template-columns:repeat(4,1fr);}
+  .logos-strip{padding:24px;flex-wrap:wrap;gap:16px;}
+  .services-section{padding:72px 24px;}.services-grid{grid-template-columns:1fr;}
+  .points-section{padding:0 24px 72px;}.points-hero{grid-template-columns:1fr;gap:32px;padding:36px;}
+  .points-grid{grid-template-columns:1fr;}
+  .bento-section{padding:0 24px 72px;}.bento-grid{grid-template-columns:1fr;}.bento-card.wide{grid-column:span 1;}
+  .how-section{padding:0 24px 72px;}.how-grid{grid-template-columns:repeat(2,1fr);gap:36px;}.how-grid::before{display:none;}
+  .cta-section{margin:0 24px 60px;padding:56px 32px;}
+  footer{padding:48px 24px 0;}.footer-top{grid-template-columns:1fr 1fr;gap:40px;}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12C13.1 12 14 12.9 14 14C14 15.1 13.1 16 12 16H8" stroke="white" stroke-width="2.2" stroke-linecap="round"/><path d="M16 8V18" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+    <span class="logo-name">ahzarman</span>
+  </a>
+  <nav class="nav-center">
+    <a href="#services">Services</a><a href="#points">Points</a><a href="#features">Features</a><a href="#how">How it works</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn-ghost">Log in</a>
+    <a href="#" class="btn-green">Get started <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-chip">
+    <div class="hero-chip-dot"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5L4.5 7.5L8 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    Trusted by 2 million+ Nigerians
+  </div>
+  <h1>Pay directly.<br>Get your token<br><span class="accent">instantly.</span></h1>
+  <p class="hero-sub">Pay your bank for electricity, data, flights and betting — no stored balance, no middleman. Tokens arrive in seconds. Every payment earns you points.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn-primary-lg"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="2" stroke="white" stroke-width="1.6"/><path d="M6 12h4" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>Download app</a>
+    <a href="#services" class="btn-outline-lg">See all services</a>
+  </div>
+  <div class="social-proof">
+    <div class="avatars">
+      <div class="avatar" style="background:#F0F7E0;color:#7EA800">AO</div>
+      <div class="avatar" style="background:#E8F5E9;color:#388E3C">CJ</div>
+      <div class="avatar" style="background:#F1F8E9;color:#558B2F">KN</div>
+      <div class="avatar" style="background:#DCEDC8;color:#33691E">FM</div>
+      <div class="avatar" style="background:#CCFF90;color:#1B5E20">TL</div>
+    </div>
+    <div>
+      <div class="stars">★★★★★</div>
+      <div class="social-text"><strong>4.9 / 5</strong> from over 120,000 reviews</div>
+    </div>
+  </div>
+
+  <!-- Hero visual: floaters INSIDE the wrap, overlaying the card -->
+  <div class="hero-visual-wrap">
+
+    <!-- Float card 1: top-left — Prepaid Meter -->
+    <div class="float-card fc-top-left">
+      <div class="float-icon" style="background:#F0F7E0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#7EA800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="float-label">Prepaid Meter</div>
+        <div class="float-val">Token delivered ✓</div>
+      </div>
+    </div>
+
+    <!-- Float card 2: top-right — 24/7 live chat -->
+    <div class="float-card fc-top-right">
+      <div class="float-icon" style="background:#EFF6FF;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.5 12.27 19.79 19.79 0 01.43 3.82 2 2 0 012.43 2H5.43a2 2 0 012 1.72c.1.88.34 1.73.7 2.56a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.83.36 1.68.6 2.56.7A2 2 0 0122 16.92z" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="float-label">Support</div>
+        <div class="float-val">24 / 7 live chat</div>
+      </div>
+    </div>
+
+    <!-- Float card 3: bottom-right — Flight booked -->
+    <div class="float-card fc-bottom-right">
+      <div class="float-icon" style="background:#ECFDF5;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="float-label">Flight booked</div>
+        <div class="float-val">LOS → ABJ confirmed</div>
+      </div>
+    </div>
+
+    <!-- Dashboard card -->
+    <div class="dashboard-card">
+      <div class="dashboard-top">
+        <div class="dash-user">
+          <div class="dash-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#7EA800" stroke-width="1.8"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div><div class="dash-name">Adaeze Okonkwo</div><div class="dash-sub">What are you paying for today?</div></div>
+        </div>
+        <div class="dash-points-badge">
+          <div class="points-pill">
+            <svg viewBox="0 0 14 14" fill="none"><polygon points="7,1 9,5 13,5.5 10,8.5 10.5,13 7,11 3.5,13 4,8.5 1,5.5 5,5" stroke="#7EA800" stroke-width="1.3" fill="#7EA800" fill-opacity="0.2"/></svg>
+            2,450 pts
+          </div>
+          <div class="share-pts-btn">Share →</div>
+        </div>
+      </div>
+
+      <div class="dash-services">
+        <div class="dash-svc active"><div class="svc-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#7EA800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-label">Electricity</div></div>
+        <div class="dash-svc"><div class="svc-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M1 6l4 4 4-4 4 4 4-4 4 4M1 12l4 4 4-4 4 4 4-4 4 4" stroke="#6B6B6B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-label">Data</div></div>
+        <div class="dash-svc"><div class="svc-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.5 12.27 19.79 19.79 0 01.43 3.82 2 2 0 012.43 2H5.43a2 2 0 012 1.72c.1.88.34 1.73.7 2.56a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.83.36 1.68.6 2.56.7A2 2 0 0122 16.92z" stroke="#6B6B6B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-label">Airtime</div></div>
+        <div class="dash-svc"><div class="svc-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M21 16v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2" stroke="#6B6B6B" stroke-width="1.8" stroke-linecap="round"/><polyline points="7 10 12 15 17 10" stroke="#6B6B6B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="#6B6B6B" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="svc-label">Betting</div></div>
+        <div class="dash-svc"><div class="svc-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M22 8h-2M2 8h2M22 16h-2M2 16h2" stroke="#6B6B6B" stroke-width="1.8" stroke-linecap="round"/><rect x="4" y="4" width="16" height="16" rx="3" stroke="#6B6B6B" stroke-width="1.8"/></svg></div><div class="svc-label">Cable TV</div></div>
+        <div class="dash-svc"><div class="svc-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#6B6B6B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#6B6B6B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-label">Flights</div></div>
+      </div>
+
+      <div class="dash-pay-panel">
+        <div class="panel-label">Electricity — IBEDC Prepaid</div>
+        <div class="panel-row">
+          <input class="panel-input" type="text" value="04182736519" readonly/>
+          <input class="panel-input" type="text" value="IBEDC" readonly style="max-width:100px;"/>
+        </div>
+        <div class="panel-amounts">
+          <div class="amt-chip">₦1,000</div><div class="amt-chip sel">₦5,000</div><div class="amt-chip">₦10,000</div><div class="amt-chip">₦20,000</div>
+        </div>
+        <div class="points-earn-hint">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><polygon points="7,1 9,5 13,5.5 10,8.5 10.5,13 7,11 3.5,13 4,8.5 1,5.5 5,5" stroke="#7EA800" stroke-width="1.3" fill="#7EA800" fill-opacity="0.2"/></svg>
+          This payment earns you <strong style="margin:0 3px;">50 points</strong> — shareable with friends in the app.
+        </div>
+        <div class="panel-note">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#A3A3A3" stroke-width="1.6"/><line x1="12" y1="8" x2="12" y2="12" stroke="#A3A3A3" stroke-width="1.6" stroke-linecap="round"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="#A3A3A3" stroke-width="1.6" stroke-linecap="round"/></svg>
+          You pay directly via bank transfer or card — we don't hold your money. Token arrives as soon as the bank confirms.
+        </div>
+        <button class="btn-pay-now"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pay ₦5,000 — Get token instantly</button>
+      </div>
+
+      <div class="dash-section-label">Recent payments</div>
+      <div class="tx-list">
+        <div class="tx">
+          <div class="tx-icon" style="background:#F0F7E0;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#7EA800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tx-info"><div class="tx-name">IBEDC Prepaid · Meter 04182…</div><div class="tx-time">Today, 2:14 PM · via GTBank</div><div class="tx-token">Token: 5836-2947-1055-83</div></div>
+          <div class="tx-right"><div class="tx-amount">₦5,000</div><div class="tx-pts">+50 pts</div></div>
+        </div>
+        <div class="tx">
+          <div class="tx-icon" style="background:#EFF6FF;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tx-info"><div class="tx-name">Lagos → Abuja · Air Peace</div><div class="tx-time">Yesterday · via Zenith Bank</div></div>
+          <div class="tx-right"><div class="tx-amount">₦28,500</div><div class="tx-pts">+285 pts</div></div>
+        </div>
+        <div class="tx">
+          <div class="tx-icon" style="background:#F0F7E0;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 16v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round"/><polyline points="7 10 12 15 17 10" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="tx-info"><div class="tx-name">Bet9ja Wallet Funding</div><div class="tx-time">Mar 17 · via Access Bank</div></div>
+          <div class="tx-right"><div class="tx-amount">₦10,000</div><div class="tx-pts">+100 pts</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-strip">
+  <span class="logos-label">Works with</span>
+  <div class="logos-track">
+    <div class="logo-pill"><svg viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#F59E0B"/><path d="M5 9h8M9 5v8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>Bet9ja</div>
+    <div class="logo-pill"><svg viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#1D4ED8"/><path d="M4 9l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>SportyBet</div>
+    <div class="logo-pill"><svg viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#15803D"/><circle cx="9" cy="9" r="4" stroke="white" stroke-width="1.8"/></svg>MTN</div>
+    <div class="logo-pill"><svg viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#DC2626"/><path d="M5 5l8 8M13 5l-8 8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>Airtel</div>
+    <div class="logo-pill"><svg viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#7C3AED"/><path d="M9 4v10M4 9h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>DStv</div>
+    <div class="logo-pill"><svg viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#0369A1"/><path d="M6 12l3-8 3 8M5 9.5h8" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Air Peace</div>
+    <div class="logo-pill"><svg viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#B45309"/><path d="M5 9h8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>BetKing</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-eyebrow reveal">What we offer</div>
+  <h2 class="section-heading reveal">Everything in one place.</h2>
+  <p class="section-sub reveal">Pay directly via your bank. No stored balance needed. Every payment earns Ahzarman points you can share with friends.</p>
+  <div class="services-grid">
+    <div class="svc-card reveal delay-1">
+      <div class="svc-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#7EA800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Electricity Bills</h3>
+      <p>Pay AEDC, EKEDC, IBEDC and all discos directly from your bank. Your prepaid token is delivered in seconds.</p>
+      <div class="svc-card-footer"><div class="svc-card-tag">Token in seconds <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M8 4l2 2-2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-pts-tag">Earns points</div></div>
+    </div>
+    <div class="svc-card reveal delay-2">
+      <div class="svc-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M1 6l4 4 4-4 4 4 4-4 4 4M1 12l4 4 4-4 4 4 4-4 4 4" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Airtime & Data</h3>
+      <p>Top up any Nigerian network. Pay your bank and the recharge hits the number immediately — no balance needed.</p>
+      <div class="svc-card-footer"><div class="svc-card-tag">MTN, Airtel, Glo, 9mobile <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M8 4l2 2-2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-pts-tag">Earns points</div></div>
+    </div>
+    <div class="svc-card reveal delay-3">
+      <div class="svc-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Flight Booking</h3>
+      <p>Search and book domestic and international flights. Pay your bank and your e-ticket arrives instantly.</p>
+      <div class="svc-card-footer"><div class="svc-card-tag">Domestic & international <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M8 4l2 2-2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-pts-tag">Earns points</div></div>
+    </div>
+    <div class="svc-card reveal delay-1">
+      <div class="svc-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#7EA800" stroke-width="1.8"/><path d="M12 8v4l3 3" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Betting Wallet Funding</h3>
+      <p>Fund Bet9ja, SportyBet, BetKing and more directly from your bank. Your betting account is credited in seconds.</p>
+      <div class="svc-card-footer"><div class="svc-card-tag">Instant credit <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M8 4l2 2-2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-pts-tag">Earns points</div></div>
+    </div>
+    <div class="svc-card reveal delay-2">
+      <div class="svc-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="14" rx="2" stroke="#7EA800" stroke-width="1.8"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2M8 12h8M8 16h5" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <h3>Cable TV</h3>
+      <p>Renew DStv, GOtv and Startimes subscriptions. Pay your bank and your subscription activates immediately.</p>
+      <div class="svc-card-footer"><div class="svc-card-tag">All bouquets <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M8 4l2 2-2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-pts-tag">Earns points</div></div>
+    </div>
+    <div class="svc-card reveal delay-3">
+      <div class="svc-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Water & Government</h3>
+      <p>Pay water bills, state levies and government fees. Pay your bank and receive an auto-saved receipt instantly.</p>
+      <div class="svc-card-footer"><div class="svc-card-tag">Official integrations <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M8 4l2 2-2 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-pts-tag">Earns points</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- POINTS SECTION -->
+<section class="points-section" id="points">
+  <div class="section-eyebrow reveal">Rewards</div>
+  <h2 class="section-heading reveal">Pay more, earn more.<br>Share with friends.</h2>
+  <p class="section-sub reveal">Every naira you spend through Ahzarman earns you points. Collect them, share them with friends inside the app — no expiry, no catch.</p>
+
+  <div class="points-hero reveal">
+    <div class="points-hero-text">
+      <h2>Earn points on <span>every</span> payment.</h2>
+      <p>Whether you're buying ₦500 data or booking a flight to Abuja — Ahzarman rewards you for every transaction, automatically.</p>
+      <div class="points-how">
+        <div class="points-how-item"><div class="pts-step-num">1</div><div class="pts-step-text"><strong>Pay for any service</strong> — electricity, data, flights, betting, cable or government fees.</div></div>
+        <div class="points-how-item"><div class="pts-step-num">2</div><div class="pts-step-text"><strong>Points land automatically</strong> — 1 point per ₦100 spent, visible in your app instantly.</div></div>
+        <div class="points-how-item"><div class="pts-step-num">3</div><div class="pts-step-text"><strong>Share with friends</strong> — send points to any Ahzarman user right from your account, for free.</div></div>
+      </div>
+    </div>
+    <div class="points-card-mockup">
+      <div class="pts-card-top">
+        <div>
+          <div class="pts-card-label">Your points</div>
+          <div class="pts-card-balance">2,450</div>
+          <div class="pts-card-sub">Keep paying to level up</div>
+        </div>
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><polygon points="18,3 22,14 34,14 24,22 28,34 18,27 8,34 12,22 2,14 14,14" fill="#7EA800" fill-opacity="0.25" stroke="#7EA800" stroke-width="1.5"/></svg>
+      </div>
+      <div class="pts-bar"><div class="pts-bar-fill"></div></div>
+      <div class="pts-bar-label"><span>2,450 pts</span><span>Next tier at 5,000</span></div>
+      <div class="pts-actions">
+        <button class="pts-action-btn primary"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="white" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>Share points</button>
+        <button class="pts-action-btn secondary">View history</button>
+      </div>
+      <div class="pts-share-list">
+        <div class="pts-friend"><div class="pts-friend-av" style="background:rgba(126,168,0,0.2);color:#7EA800;">CJ</div><div class="pts-friend-name">Chidi Jude</div><div class="pts-friend-sent">+200 pts sent</div></div>
+        <div class="pts-friend"><div class="pts-friend-av" style="background:rgba(126,168,0,0.15);color:#9DC416;">FM</div><div class="pts-friend-name">Fatima Musa</div><div class="pts-friend-sent">+150 pts sent</div></div>
+        <div class="pts-friend"><div class="pts-friend-av" style="background:rgba(126,168,0,0.12);color:#5C7A00;">KN</div><div class="pts-friend-name">Kunle Nwosu</div><div class="pts-friend-sent">+100 pts sent</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="points-grid">
+    <div class="pts-feat-card reveal delay-1">
+      <div class="pts-feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#7EA800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h4>Auto-earned on every payment</h4>
+      <p>Points are added to your account the moment a payment is confirmed — nothing to activate or opt into.</p>
+    </div>
+    <div class="pts-feat-card reveal delay-2">
+      <div class="pts-feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="#7EA800" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <h4>Share with any Ahzarman friend</h4>
+      <p>Find a friend by phone number and send any amount of your points directly within the app — instant and free.</p>
+    </div>
+    <div class="pts-feat-card reveal delay-3">
+      <div class="pts-feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#7EA800" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h4>Points never expire</h4>
+      <p>Your Ahzarman points stay in your account for as long as you have one. Collect them at your own pace.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BENTO -->
+<section class="bento-section" id="features">
+  <div class="section-eyebrow reveal">Why Ahzarman</div>
+  <h2 class="section-heading reveal">Designed to be<br>effortlessly fast.</h2>
+  <p class="section-sub reveal">We handle the connection between your bank and every biller — so you don't have to.</p>
+  <div class="bento-grid">
+    <div class="bento-card wide reveal">
+      <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#7EA800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Pay once, delivered instantly</h3>
+      <p>Pay your bank directly. Ahzarman routes it to the biller, your token lands in seconds — no wallet, no waiting, and you earn points automatically.</p>
+      <div class="mini-tx-list">
+        <div class="mini-tx"><div class="mini-tx-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#7EA800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mini-tx-name">IBEDC Prepaid · Meter 04182…</span><div class="mini-tx-right"><span class="mini-tx-amt">₦5,000</span><span class="mini-tx-token">Token sent ✓</span><span class="mini-tx-pts">+50 pts</span></div></div>
+        <div class="mini-tx"><div class="mini-tx-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#7EA800" stroke-width="1.8"/><path d="M12 8v4l3 3" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mini-tx-name">Bet9ja Wallet</span><div class="mini-tx-right"><span class="mini-tx-amt">₦10,000</span><span class="mini-tx-token">Credited ✓</span><span class="mini-tx-pts">+100 pts</span></div></div>
+        <div class="mini-tx"><div class="mini-tx-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="mini-tx-name">Flight LOS–ABJ</span><div class="mini-tx-right"><span class="mini-tx-amt">₦28,500</span><span class="mini-tx-token">E-ticket ✓</span><span class="mini-tx-pts">+285 pts</span></div></div>
+      </div>
+    </div>
+    <div class="bento-card tall accent reveal">
+      <div><div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Bank-grade security</h3><p>256-bit encryption. Your card and account details are never stored on our servers.</p></div>
+      <div class="bento-stat">256<br>bit</div>
+    </div>
+    <div class="bento-card tall dark reveal">
+      <div><div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.5)" stroke-width="1.8"/><path d="M12 6v6l4 2" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Always available</h3><p>Our biller connections stay live around the clock — pay at midnight, get your token at midnight.</p></div>
+      <div class="bento-stat" style="color:var(--green-mid);">99.9<span style="font-size:24px;letter-spacing:0">%</span></div>
+    </div>
+    <div class="bento-card reveal"><div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>24 / 7 live support</h3><p>Real humans, in-app chat, every day including weekends and public holidays.</p></div>
+    <div class="bento-card reveal"><div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>No stored funds</h3><p>Your money goes directly from your bank to the biller. We never hold a naira on your behalf.</p></div>
+    <div class="bento-card reveal"><div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#7EA800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>2M+ users</h3><p>Nigerians across all 36 states trust Ahzarman for their daily payments and bookings.</p><div class="bento-stat" style="font-size:36px;margin-top:12px;">2M<span style="color:var(--green);font-size:22px">+</span></div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-eyebrow reveal">Getting started</div>
+  <h2 class="section-heading reveal">Up and running in minutes.</h2>
+  <div class="how-grid">
+    <div class="how-step reveal delay-1"><div class="how-step-num">1</div><h4>Create your account</h4><p>Sign up with your phone number. Verification takes under two minutes with BVN confirmation.</p></div>
+    <div class="how-step reveal delay-2"><div class="how-step-num">2</div><h4>Choose a service</h4><p>Pick what you want to pay — electricity, data, flights, betting and more — all in one place.</p></div>
+    <div class="how-step reveal delay-3"><div class="how-step-num">3</div><h4>Pay your bank</h4><p>Complete payment via bank transfer, debit card or USSD. Your money goes straight to the biller — we don't hold it.</p></div>
+    <div class="how-step reveal"><div class="how-step-num">4</div><h4>Get token & earn points</h4><p>Your electricity token, e-ticket or confirmation is delivered instantly. Points land in your account automatically.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to simplify<br>your payments?</h2>
+  <p>Join over 2 million Nigerians who pay bills, book flights and earn points with Ahzarman — directly from their bank.</p>
+  <div class="cta-btns">
+    <a href="#" class="btn-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.32.06 2.24.73 3.03.77.98-.21 1.93-.89 3.03-.77 1.33.15 2.34.79 2.99 2.01-2.71 1.67-2.04 5.36.56 6.47-.67 1.53-1.6 3.09-2.61 4.38z"/></svg>App Store</a>
+    <a href="#" class="btn-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2.87 2.87 0 002.82-.19l12.29-7.11-2.77-2.78zM.54 1.15A2.92 2.92 0 000 2.88v18.24a2.92 2.92 0 00.54 1.73L.67 23 13 10.72v-.44L.67.9z"/><path d="M17.69 14.93l-4.1-4.1L17.69 6.73l.05.03 4.86 2.76a2.92 2.92 0 010 5.11l-4.91 2.3z"/></svg>Google Play</a>
+    <a href="#" class="btn-green-outline">Use on web →</a>
+  </div>
+  <div class="cta-note">Free to download &nbsp;·&nbsp; No setup fees &nbsp;·&nbsp; No stored funds</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo"><div class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12C13.1 12 14 12.9 14 14C14 15.1 13.1 16 12 16H8" stroke="white" stroke-width="2.2" stroke-linecap="round"/><path d="M16 8V18" stroke="white" stroke-width="2.2" stroke-linecap="round"/></svg></div><span class="logo-name">ahzarman</span></div>
+      <p>Pay your bank. Get your token. Earn points. No wallet, no middleman — just instant delivery for every bill and booking.</p>
+      <div class="footer-stores">
+        <a href="#" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.32.06 2.24.73 3.03.77.98-.21 1.93-.89 3.03-.77 1.33.15 2.34.79 2.99 2.01-2.71 1.67-2.04 5.36.56 6.47-.67 1.53-1.6 3.09-2.61 4.38z"/></svg>App Store</a>
+        <a href="#" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M3.18 23.76a2.87 2.87 0 002.82-.19l12.29-7.11-2.77-2.78zM.54 1.15A2.92 2.92 0 000 2.88v18.24a2.92 2.92 0 00.54 1.73L.67 23 13 10.72v-.44zM17.69 14.93l-4.1-4.1 4.1-4.1 4.91 2.79a2.92 2.92 0 010 5.11z"/></svg>Google Play</a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Services</h5><ul><li><a href="#">Electricity Bills</a></li><li><a href="#">Airtime & Data</a></li><li><a href="#">Flight Booking</a></li><li><a href="#">Betting Wallets</a></li><li><a href="#">Cable TV</a></li><li><a href="#">Water & Government</a></li></ul></div>
+    <div class="footer-col"><h5>Company</h5><ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul></div>
+    <div class="footer-col"><h5>Support</h5><ul><li><a href="#">Help centre</a></li><li><a href="#">Contact us</a></li><li><a href="#">Privacy policy</a></li><li><a href="#">Terms of service</a></li><li><a href="#">Status</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Ahzarman. All rights reserved.</span>
+    <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="#">🇳🇬 Nigeria</a></div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
