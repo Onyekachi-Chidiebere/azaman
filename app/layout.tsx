@@ -15,6 +15,11 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Ahzarman — One app for everything",
   description: "Pay directly. Get your token instantly. Pay your bank for electricity, data, flights and betting — no stored balance, no middleman.",
+  icons: {
+    icon: "/icon.PNG",
+    shortcut: "/icon.PNG",
+    apple: "/icon.PNG",
+  },
 };
 
 export default function RootLayout({
