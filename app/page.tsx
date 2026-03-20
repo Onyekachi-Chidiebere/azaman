@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 
 export default function Home() {
   useEffect(() => {
@@ -118,7 +119,7 @@ export default function Home() {
             See all services
           </a>
         </div>
-        <div className="social-proof">
+        {/* <div className="social-proof">
           <div className="avatars">
             <div
               className="avatar"
@@ -157,7 +158,7 @@ export default function Home() {
               <strong>4.9 / 5</strong> from over 120,000 reviews
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="hero-visual-wrap">
           <div className="float-card fc-top-left">
@@ -453,7 +454,7 @@ export default function Home() {
             </div>
 
             <div className="dash-section-label">Recent payments</div>
-            <div className="tx-list">
+            {/* <div className="tx-list">
               <div className="tx">
                 <div className="tx-icon" style={{ background: "#F0F7E0" }}>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
@@ -532,7 +533,7 @@ export default function Home() {
                   <div className="tx-pts">+100 pts</div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -540,67 +541,34 @@ export default function Home() {
       <div className="logos-strip">
         <span className="logos-label">Works with</span>
         <div className="logos-track">
+         
+          
+         
+          
+          
           <div className="logo-pill">
-            <svg viewBox="0 0 18 18" fill="none">
-              <rect width="18" height="18" rx="4" fill="#F59E0B" />
-              <path d="M5 9h8M9 5v8" stroke="white" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            Bet9ja
+            <Image alt='bet9ja' width={50}height={20} src='/logos/bet9ja.png'/>
           </div>
           <div className="logo-pill">
-            <svg viewBox="0 0 18 18" fill="none">
-              <rect width="18" height="18" rx="4" fill="#1D4ED8" />
-              <path
-                d="M4 9l3 3 7-7"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            SportyBet
+            <Image alt='sporty' width={20}height={20} src='/logos/sportybet.png'/>
           </div>
           <div className="logo-pill">
-            <svg viewBox="0 0 18 18" fill="none">
-              <rect width="18" height="18" rx="4" fill="#15803D" />
-              <circle cx="9" cy="9" r="4" stroke="white" strokeWidth="1.8" />
-            </svg>
-            MTN
+            <Image alt='mtn' width={20}height={20} src='/logos/mtn.jpeg'/>
           </div>
           <div className="logo-pill">
-            <svg viewBox="0 0 18 18" fill="none">
-              <rect width="18" height="18" rx="4" fill="#DC2626" />
-              <path d="M5 5l8 8M13 5l-8 8" stroke="white" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            Airtel
+            <Image alt='airtel' width={100}height={20} src='/logos/airtel.png'/>
           </div>
           <div className="logo-pill">
-            <svg viewBox="0 0 18 18" fill="none">
-              <rect width="18" height="18" rx="4" fill="#7C3AED" />
-              <path d="M9 4v10M4 9h10" stroke="white" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            DStv
+            <Image alt='dstv' width={20}height={20} src='/logos/dstv.png'/>
           </div>
           <div className="logo-pill">
-            <svg viewBox="0 0 18 18" fill="none">
-              <rect width="18" height="18" rx="4" fill="#0369A1" />
-              <path
-                d="M6 12l3-8 3 8M5 9.5h8"
-                stroke="white"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Air Peace
+            <Image alt='betking' width={100}height={20} src='/logos/betking.png'/>
           </div>
+          
           <div className="logo-pill">
-            <svg viewBox="0 0 18 18" fill="none">
-              <rect width="18" height="18" rx="4" fill="#B45309" />
-              <path d="M5 9h8" stroke="white" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            BetKing
+            <Image alt='airpeace' width={100}height={20} src='/logos/airpeace.png'/>
           </div>
+          
         </div>
       </div>
 
