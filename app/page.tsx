@@ -17,7 +17,6 @@ export default function Home() {
       { threshold: 0.1 }
     );
     els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
   }, []);
 
   return (
@@ -42,12 +41,12 @@ export default function Home() {
           </div>
           <span className="logo-name">ahzarman</span>
         </a>
-        <div className="nav-center">
+        <nav className="nav-center">
           <a href="#services">Services</a>
           <a href="#points">Points</a>
           <a href="#features">Features</a>
           <a href="#how">How it works</a>
-        </div>
+        </nav>
         <div className="nav-right">
           <a href="#" className="btn-ghost">
             Log in
@@ -436,7 +435,7 @@ export default function Home() {
                     strokeLinecap="round"
                   />
                 </svg>
-                You pay directly via bank transfer or card — we don't hold your
+                You pay directly via bank transfer or card — we don&apos;t hold your
                 money. Token arrives as soon as the bank confirms.
               </div>
               <button className="btn-pay-now">
@@ -840,7 +839,7 @@ export default function Home() {
               Earn points on <span>every</span> payment.
             </h2>
             <p>
-              Whether you're buying ₦500 data or booking a flight to Abuja —
+              Whether you&apos;re buying ₦500 data or booking a flight to Abuja —
               Ahzarman rewards you for every transaction, automatically.
             </p>
             <div className="points-how">
@@ -1023,7 +1022,7 @@ export default function Home() {
         </h2>
         <p className="section-sub reveal">
           We handle the connection between your bank and every biller — so you
-          don't have to.
+          don&apos;t have to.
         </p>
         <div className="bento-grid">
           <div className="bento-card wide reveal">
@@ -1248,7 +1247,7 @@ export default function Home() {
             <h4>Pay your bank</h4>
             <p>
               Complete payment via bank transfer, debit card or USSD. Your money
-              goes straight to the biller — we don't hold it.
+              goes straight to the biller — we don&apos;t hold it.
             </p>
           </div>
           <div className="how-step reveal">
