@@ -24,23 +24,8 @@ export default function Home() {
     <>
       <nav>
         <a href="#" className="nav-logo">
-          <div className="logo-mark">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path
-                d="M16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12C13.1 12 14 12.9 14 14C14 15.1 13.1 16 12 16H8"
-                stroke="white"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-              />
-              <path
-                d="M16 8V18"
-                stroke="white"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-          <span className="logo-name">ahzarman</span>
+          <Image src="/logos/logo.PNG" alt="Ahzarman" width={180} height={32} />
+          
         </a>
         <nav className="nav-center">
           <a href="#services">Services</a>
