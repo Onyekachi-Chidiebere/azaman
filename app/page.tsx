@@ -75,7 +75,7 @@ export default function Home() {
           <span className="accent">instantly.</span>
         </h1>
         <p className="hero-sub">
-          Pay your bank for electricity, data, flights and betting — no stored
+          Pay for your electricity, data, flights and betting — no stored
           balance, no middleman. Tokens arrive in seconds. Every payment earns
           you points.
         </p>
@@ -561,7 +561,7 @@ export default function Home() {
         <div className="section-eyebrow reveal">What we offer</div>
         <h2 className="section-heading reveal">Everything in one place.</h2>
         <p className="section-sub reveal">
-          Pay directly via your bank. No stored balance needed. Every payment
+          Pay directly, no stored balance needed. Every payment
           earns Ahzarman points you can share with friends.
         </p>
         <div className="services-grid">
