@@ -1734,3 +1734,250 @@ footer {
     text-align: center;
   }
 }
+
+.deletion-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--gray-50);
+}
+
+.deletion-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+}
+
+.deletion-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px 64px;
+}
+
+.deletion-card {
+  width: 100%;
+  max-width: 640px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+}
+
+.deletion-intro {
+  margin-bottom: 32px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.deletion-title {
+  font-family: var(--font-bricolage-grotesque), sans-serif;
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.deletion-sub {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--gray-600);
+}
+
+.deletion-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.deletion-fields-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.deletion-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.deletion-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.deletion-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 0;
+}
+
+.deletion-fieldset .deletion-label {
+  margin-bottom: 2px;
+}
+
+.deletion-input,
+.deletion-textarea {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--black);
+  font-family: inherit;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.deletion-input:focus,
+.deletion-textarea:focus {
+  border-color: var(--green-border);
+  box-shadow: 0 0 0 3px rgba(126, 168, 0, 0.12);
+}
+
+.deletion-input::placeholder,
+.deletion-textarea::placeholder {
+  color: var(--gray-400);
+}
+
+.deletion-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.deletion-radio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--gray-600);
+  cursor: pointer;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--gray-50);
+  transition: border-color .15s, background .15s;
+}
+
+.deletion-radio:has(input:checked) {
+  border-color: var(--green-border);
+  background: var(--green-pale);
+  color: var(--black);
+}
+
+.deletion-radio input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--green);
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.deletion-textarea {
+  line-height: 1.55;
+  resize: vertical;
+  min-height: 110px;
+}
+
+.deletion-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.deletion-note {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--gray-400);
+}
+
+.deletion-submit {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 24px;
+  font-size: 15px;
+  border: none;
+}
+
+.deletion-success {
+  text-align: center;
+  padding: 16px 0 8px;
+}
+
+.deletion-success-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  background: var(--green-pale);
+  border: 1px solid var(--green-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deletion-success h1 {
+  font-family: var(--font-bricolage-grotesque), sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  margin-bottom: 12px;
+}
+
+.deletion-success p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--gray-600);
+  margin-bottom: 28px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.deletion-success .btn-green {
+  display: inline-flex;
+}
+
+@media (max-width: 640px) {
+  .deletion-header {
+    padding: 0 20px;
+  }
+
+  .deletion-page {
+    padding: 32px 16px 48px;
+    align-items: flex-start;
+  }
+
+  .deletion-card {
+    padding: 28px 20px;
+    border-radius: 20px;
+  }
+
+  .deletion-fields-row {
+    grid-template-columns: 1fr;
+  }
+}
